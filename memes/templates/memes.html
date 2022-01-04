@@ -1,24 +1,32 @@
 {% extends 'main.html'%}
 {%block content %}
-
-
 <p>Memes list of {{ subreddits }}</p>
 
-<h1>Memes</h1>
-<ul>
-  {% for meme in memes %}
-    <li>{{meme.title}}</li>
-    S:({{meme.score}}) {{meme.timestamp}}
+<div  class='container'>
+  <div class='col-md-4 px-0'>
+        {% for meme in memes %}
+        <div class='row mt-2'>
+          <div class='media-body'>
+            <h4 class='media-heading'>{{meme.title}}</h4>
+            S:({{meme.score}}) {{meme.timestamp}}
+            <hr>
+          </div>
+          
+          <div class="float-left" style="margin-bottom: 6em">
+            {% if meme.video_url != "" %}
+            <video width="100%" height="auto" controls>
+              <source src="{{meme.video_url}}" width="400" type="video/mp4">
+            </video>
+          {% else %}
+            <img src="{{meme.url}}" class='img-fluid'>
+          {% endif %}
+          </div>
 
-    {% if meme.video_url != "" %}
-      <video width="400" controls>
-        <source src="{{meme.video_url}}" width="400" type="video/mp4">
-      </video>
-    {% else %}
-      <img src="{{meme.url}}" width="400">
-    {% endif %}
+        </div>
+        {% endfor %}
+  </div>
+</div>
 
-  {% endfor %}
-</ul>
+
 
 {% endblock content %}
