@@ -1,0 +1,24 @@
+{% extends 'main.html'%}
+{%block content %}
+
+
+<p>Memes list of {{ subreddits }}</p>
+
+<h1>Memes</h1>
+<ul>
+  {% for meme in memes %}
+    <li>{{meme.title}}</li>
+    S:({{meme.score}}) {{meme.timestamp}}
+
+    {% if meme.video_url != "" %}
+      <video width="400" controls>
+        <source src="{{meme.video_url}}" width="400" type="video/mp4">
+      </video>
+    {% else %}
+      <img src="{{meme.url}}" width="400">
+    {% endif %}
+
+  {% endfor %}
+</ul>
+
+{% endblock content %}
